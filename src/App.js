@@ -4,31 +4,31 @@
 // ************************************************************************************************
 // ************************************************************************************************
 
-import React, { useContext, createContext } from "react";
+// import React, { useContext, createContext } from "react";
 
-const TestContext = createContext();
+// const TestContext = createContext();
 
-const TestContext2 = createContext();
+// const TestContext2 = createContext();
 
-const UseContextExample = () => {
-  const hello = useContext(TestContext);
-  const world = useContext(TestContext2);
-  return <div>{hello + " " + world}</div>;
-};
+// const UseContextExample = () => {
+//   const hello = useContext(TestContext);
+//   const world = useContext(TestContext2);
+//   return <div>{hello + " " + world}</div>;
+// };
 
-function App() {
-  return (
-    <div className="App">
-      <TestContext.Provider value="hello">
-        <TestContext2.Provider value="world!">
-          <UseContextExample />
-        </TestContext2.Provider>
-      </TestContext.Provider>
-    </div>
-  );
-}
+// function App() {
+//   return (
+//     <div className="App">
+//       <TestContext.Provider value="hello">
+//         <TestContext2.Provider value="world!">
+//           <UseContextExample />
+//         </TestContext2.Provider>
+//       </TestContext.Provider>
+//     </div>
+//   );
+// }
 
-export default App;
+// export default App;
 
 //************************************************************************************************
 //************************************************************************************************
@@ -186,3 +186,25 @@ export default App;
 // EXAMPLE 4
 //************************************************************************************************
 //************************************************************************************************
+
+import React, { useState } from "react";
+import ClassContextComponent from "./ClassContextComponent";
+
+export const ThemeContext = React.createContext();
+
+export default function App() {
+  const [darkTheme, setDarkTheme] = useState(true);
+
+  function toggleTheme() {
+    setDarkTheme((prevDarkTheme) => !prevDarkTheme);
+  }
+
+  return (
+    <>
+      <ThemeContext.Provider value={darkTheme}>
+        <button onClick={toggleTheme}>Toggle Theme</button>
+        <ClassContextComponent />
+      </ThemeContext.Provider>
+    </>
+  );
+}
